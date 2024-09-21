@@ -20,6 +20,8 @@
 // with any we're actually ignoring the types in typescript so we can change the value of the varable to another value that has another type 
 // y = 5
 // console.log(y);
+// Introduction to TypeScript object type:
+// see : https://www.typescripttutorial.net/typescript-tutorial/typescript-object-type/
 //Arrays type:
 // const arr : string[] = []
 // arr.push("heyy!")
@@ -199,3 +201,62 @@
 // }
 // console.log(MyMixedEnum.Name);
 // console.log(MyMixedEnum.Age);
+// Union Types: 
+// using  | we can say that our parameter could have any of the types mentioned :
+// function printStatusCode(code: string | number){
+//     console.log(`The status code is ${code}`);    
+// }
+// printStatusCode('200')
+// printStatusCode(404)
+// Union Type Errors:
+// Note if we use the Union types and then we use a method that is not defined on one of the types then we'll get error:
+// In fact the type should be clear before using any method on that else we'll get an error for example:
+// function printStatusCodeWithMethodError(code: string | number){
+//     console.log(`The status code is ${code.toUpperCase()}`);    
+// }
+// In this function since we don't know the type before calling the function so using of toUpperCase method, which is a method for strings but not for numbers we'll be a problem.
+// But if we define a variable and assinge a value to it and then using the method on it we'll have no problem since the type of the variable has been defined while assigning the value to it:
+// let myVar : string | number = 'sdf'
+// console.log(myVar.toUpperCase());
+// One possible solution for the type for function above is to use type unknown instead of union types as below (unknown types discussed before in the code look at the beginning):
+// function printStatusCodeWithMethodError(code: unknown){
+//     console.log(`The status code is ${(code as string).toUpperCase()}`);    
+// }
+// Functions in typescript (important):
+// see https://www.w3schools.com/typescript/typescript_functions.php
+// function functionTypes (a: number, b: number, c?: number) : number{
+//     return a + b + (c || 0)
+// }
+// functionTypes(3,4) // c was an optional paramter
+// functionTypes(3,4,5)
+// function functionWithVoidReturnType (msg? : string): void{
+//     console.log(`The message ${msg || ''}`);   
+// }
+// functionWithVoidReturnType()
+// functionWithVoidReturnType('msg')
+// note1: If no return type is defined, TypeScript will attempt to infer it through the types of the variables or expressions returned.
+// note2: If no parameter type is defined, TypeScript will default to using any, unless additional type information is available as shown in the Default Parameters and Type Alias sections below.
+// function pow(value : number , exponent: number = 10){
+//     return value ** exponent
+// }
+// console.log(pow(10));
+// here we can not definde the exponent as optional because we're giving it a default value so if we also don't write it it's actually ignored like optional but intstead it has a default value
+// Named parameters (like object destructure with types (it's actually the same)): 
+// function divide({ dividend , divisor} : {dividend : number, divisor: number}){
+//     return dividend / divisor
+// }
+// console.log(divide({dividend: 10, divisor: 2}));
+// // object destructuring with typscript types for objects:
+// const { dividend , divisor} : {dividend : number, divisor: number} = {dividend:3, divisor:3}
+// Rest Parameters: Rest parameters can be typed like normal parameters, but the type must be an array as rest parameters are always arrays.
+// function add (a : number , b : number, ...rest : number[]){
+//     return a + b + rest.reduce((previousOrInitialValue , currentValue) => previousOrInitialValue + currentValue, 0)
+// }
+// console.log(add(10,10,10,10,10));
+// Type Alias in functions:
+//Function types can be specified separately from functions with type aliases.
+//These types are written similarly to arrow functions
+// type Negate = (value : number) => number
+// const negateFunction : Negate = (value) => value * -1
+// console.log(negateFunction(5));
+// Casting : almost discussed at the beginning with unknown type but see here :https://www.w3schools.com/typescript/typescript_casting.php
