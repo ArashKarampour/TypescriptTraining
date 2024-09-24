@@ -448,3 +448,5 @@
 // }
 
 // // note: Abstract classes cannot be directly instantiated, as they do not have all their members implemented.
+
+// Generecs: see here: https://www.w3schools.com/typescript/typescript_basic_generics.php
