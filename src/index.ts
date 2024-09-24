@@ -345,3 +345,106 @@
 
 // Casting : almost discussed at the beginning with unknown type but see here :https://www.w3schools.com/typescript/typescript_casting.php
 
+// Classes in Typescript(important): see https://www.w3schools.com/typescript/typescript_classes.php
+// classes in typescript are kind of like in java. we don't have the concept of public,private,protected or interface for example in classes of the javascript but we have them in typescript.
+// by default every class member and method is public
+// example:
+
+// class Person{
+//     private readonly name : string;
+
+//     constructor(name : string){
+//         // name cannot be changed after this initial definition, which has to be either at it's declaration or in the constructor.(because of readonly)
+//         this.name = name
+//     }
+
+//     public getName():string{
+//         return this.name;
+//     }
+// }
+
+// const person = new Person('Arash')
+// console.log(person.getName());
+
+// The same thing we can also do it like this :
+// class Person {
+//   // name is a private member variable
+//   public constructor(private readonly name: string) {} // we have deleted the name defintition from the above of class and we also don't need to use this.name = name in the constructor in with this approach
+
+//   public getName(): string {
+//     return this.name;
+//   }
+// }
+      
+// const person = new Person("Arash");
+
+// console.log(person.getName());
+
+// Inheritance:
+// interface Shape {
+//     getArea: () => number;
+// }
+
+// class Rectangle implements Shape {
+//     protected readonly width : number
+//     protected readonly height : number
+//     constructor (width : number,height: number){
+//         this.width = width
+//         this.height = height
+//     }
+
+//     getArea() : number {
+//         return this.width * this.height
+//     }
+
+//     toString(): string {
+//         return `Rectangle[width=${this.width}, height=${this.height}]`
+//     }
+// }
+
+// note1: A class can implement multiple interfaces by listing each one after implements, separated by a comma like so: class Rectangle implements Shape, Colored {
+// note2: Classes can extend each other through the extends keyword. A class can only extends one other class.
+// note3: When a class extends another class, it can replace the members of the parent class with the same name.Newer versions of TypeScript allow explicitly marking this with the override keyword.
+// note4: By default the override keyword is optional when overriding a method, and only helps to prevent accidentally overriding a method that does not exist. Use the setting noImplicitOverride to force it to be used when overriding.
+
+// class Square extends Rectangle {
+//     constructor (width : number) {
+//         super(width,width)// this will use the contructor of the extended class (here Rectangle class)
+//     }
+//     // getArea gets inherited from Rectangle
+//     override toString(): string {
+//         return `Square[width=${this.width}]`
+//     }
+// }
+
+// const square : Square = new Square(5)
+// console.log(square.getArea())
+// console.log(square.toString());
+
+
+// abstract classes:
+// what is the difference between abstract classes and interfaces?
+// in interfaces we don't have any implementation but in abstract classes some methods could have implmentation as well as constructor in the abstract class and member fields but in interfaces we just define the types of the members(variables) and methods. in fact the abstract classes are like normal classes with the difference that some methods could have abstract keyword before them so these methods could be implemnted in the classes that extend this abstract class.
+// see also here for complete answer and example: https://chatgpt.com/share/66f2c4dd-9aa8-8002-b9bc-58b756f05385
+
+// abstract class Polygon {
+//     public abstract getArea(): number;
+
+//     public toString(): string {
+//         return `Polygon[area=${this.getArea()}]`
+//     }
+// }
+
+// class Rectangle extends Polygon {
+//     constructor(protected readonly width : number , protected readonly height: number){
+//         super() // if we implemented an interface we didn't need this super keyword. in this case the above class constructor is just by default empty as implemented but if the costructor of the super class was implemented we would have needed the arguments for this super as well.
+//                 // unlike other languages like java we can not have multiple constructors in typescript(or javascript)
+//                 // see https://chatgpt.com/share/66f2c4dd-9aa8-8002-b9bc-58b756f05385 at the end for nfos about constructors in typescript(javascipt)
+//     }
+
+//     public getArea(): number {
+//         return this.width * this.height
+//     }
+// }
+
+// // note: Abstract classes cannot be directly instantiated, as they do not have all their members implemented.
