@@ -450,3 +450,52 @@
 // // note: Abstract classes cannot be directly instantiated, as they do not have all their members implemented.
 
 // Generecs: see here: https://www.w3schools.com/typescript/typescript_basic_generics.php
+
+// Generics with functions (the return type is in this example just a tuple(typed array in typescript))
+// function testGenerics<S, T>(v1 : S, v2 : T) : [S, T] {
+//     return [v1, v2]
+// }
+
+// console.log(testGenerics<string,number>('mystring',10));
+
+// Generics with classes (=string in N=string is the default value if it's not defined by us):
+// class NameAgeValue<N=string> {
+//     private name : string
+//     private _ageValue? : N | number | undefined
+
+//     constructor(name : string){
+//         this.name = name
+//     }
+//     setAgeValue(ageValue : N | number){
+//         this._ageValue = ageValue
+//     }
+//     getAgeValue(){
+//         return this._ageValue
+//     }
+
+//     toString(): string{
+//         return `${this.name} is ${this._ageValue}`
+//     }
+// }
+
+// const nameAgeValue = new NameAgeValue<number>('Arash')
+// nameAgeValue.setAgeValue(25)
+// console.log(nameAgeValue.toString())
+
+// notes:  
+// TypeScript can also infer the type of the generic parameter from the function parameters.
+// TypeScript can also infer the type of the generic parameter if it's used in a constructor parameter.
+
+// interface Wrapped<T, N> {
+//     value1 : T,
+//     value2 : N
+// }
+// // or
+// // type  Wrapped<T, N> = {
+// //     value1 : T,
+// //     value2 : N
+// // }
+
+// const testValue : Wrapped<number, string> = { value1 : 10, value2: 'test'}
+
+// console.log(testValue);
